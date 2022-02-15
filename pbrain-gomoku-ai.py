@@ -7,11 +7,12 @@ def search(tab, target, value):
     return False
 
 
-def search_two(tab, target):
+def get_all_by_max_value(tab, max_value):
+    res = []
     for i in tab:
-        if i[3] == target:
-            return i
-    return False
+        if i[2] == max_value:
+            res.append(i)
+    return res
 
 
 def vt_fct(plateau, x, y, target):
@@ -118,56 +119,52 @@ def stat_exc(value, x, y, tab, target):
 
 
 def evalMap(plateau, is_me_turn, color):
-    tab = []
-    max_value = 0
+    tab_black = []
+    tab_white = []
+    max_black = 0
+    max_white = 0
     for y in range(0, len(plateau)):
         for x in range(0, len(plateau[y])):
             if plateau[y][x] == -1:
                 eval_black = evalAllDirection(plateau, x, y, 1)
                 eval_white = evalAllDirection(plateau, x, y, 0)
                 if eval_black > 2.0:
-                    tab = stat_exc(eval_black, x, y, tab, 1)
+                    tab_black = stat_exc(eval_black, x, y, tab_black, 1)
+                    if len(tab_black) > 0 and tab_black[-1][2] > max_black:
+                        max_black = tab_black[-1][2]
                 elif eval_white > 2.0:
-                    tab = stat_exc(eval_white, x, y, tab, 0)
-                if len(tab) > 0 and tab[-1][2] > max_value:
-                    max_value = tab[-1][2]
+                    tab_white = stat_exc(eval_white, x, y, tab_white, 0)
+                    if len(tab_white) > 0 and tab_white[-1][2] > max_white:
+                        max_white = tab_white[-1][2]
                 # plateau[y][x] = evalAllDirection(plateau, x, y, 1)
-    # for i in tab:
-    # print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
-    filtered = []
-    if is_me_turn and max_value == 10000:
-        find = search(tab, color, 10000)
-        if find != False:
-            return [find]
-        else:
-            return [tab[0]]
-
-    print(tab)
-    print(search(tab, color, max_value))
-    print(max_value)
-    max_color = 0
-    filtered_color = []
-    if max_value == 0 or search_two(tab, color) == False:
-        if plateau[int(len(plateau) / 2)][int(len(plateau[0]) / 2)] == -1:
-            return [[int(len(plateau[0]) / 2), int(len(plateau) / 2), 21, color]]
-        else:
-            return [[0, 0, 21, color]]
+    if is_me_turn:
+        if max_black == 10000:
+            return [search(tab_black, color, 10000)]
+        if max_white == 10000:
+            return [search(tab_white, color, 10000)]
+        if max_black == 0:
+            if plateau[int(len(plateau) / 2)][int(len(plateau[0]) / 2)] == -1:
+                return [[int(len(plateau[0]) / 2), int(len(plateau) / 2), 21, color]]
+            else:
+                return [[0, 0, 21, color]]
+        return get_all_by_max_value(tab_black, max_black)
     else:
-        for i in tab:
-            if i[3] == color:
-                if max_color < i[2]:
-                    max_color = i[2]
-                filtered.append(i)
-        for i in filtered:
-            if i[2] == max_value:
-                filtered_color.append(i)
-    return filtered_color
+        if max_white == 10000:
+            return [search(tab_white, color, 10000)]
+        if max_black == 10000:
+            return [search(tab_black, color, 10000)]
+        if max_white == 0:
+            if plateau[int(len(plateau) / 2)][int(len(plateau[0]) / 2)] == -1:
+                return [[int(len(plateau[0]) / 2), int(len(plateau) / 2), 21, color]]
+            else:
+                return [[0, 0, 21, color]]
+        return get_all_by_max_value(tab_white, max_white)
 
 
 def ia(map, color):
     res = evalMap(map, True, color)
-    #for i in res:
-        #print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
+    # for i in res:
+    # print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
     for i in res:
         if i[3] == color:
             return int(i[0]), int(i[1])
