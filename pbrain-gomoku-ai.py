@@ -1,7 +1,27 @@
 #!/usr/bin/env python3
-from typing import Union
 
 size = 0
+
+board_tab = ["....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "....................",
+             "...................."]
 
 
 def start(input) -> str:
@@ -13,7 +33,7 @@ def start(input) -> str:
     return "OK - everything is good"
 
 
-def turn(input) -> str:
+def turn(input):
     if len(input) != 3:
         return 'ERROR Turn command - unsupported size or other error'
     if input[1].isdigit() is False or input[2].isdigit() is False:
@@ -26,7 +46,7 @@ def turn(input) -> str:
     return f'{x},{y}'
 
 
-def begin(input) -> Union[tuple[str, str], str]:
+def begin(input):
     if len(input) != 1:
         return 'ERROR', 'Begin command - No arguments expected.'
     x = int(size / 2)
@@ -34,27 +54,28 @@ def begin(input) -> Union[tuple[str, str], str]:
     return f'{x}{y}'
 
 
-def board(input) -> str:
+def board(input):
     return "ERROR"
 
 
-def info(input) -> str:
+def info(input):
     if len(input) != 3:
         return 'ERROR Info command - Invalid arguments.'
+    return f'DEBUG {input[1]} {input[2]}'
 
 
-def end(input) -> str:
+def end(input):
     if len(input) != 1:
         return 'ERROR End command - No arguments expected.'
     exit(0)
 
 
-def about(input) -> str:
+def about(input):
     if len(input) != 1:
         return 'ERROR About command - No arguments expected.'
 
 
-def run(arg) -> None:
+def run(arg):
     if arg == "":
         print("UNKNOWN")
     input = arg.replace(',', ' ').split()
@@ -77,4 +98,6 @@ def run(arg) -> None:
 if __name__ == "__main__":
     while True:
         arg = input()
+        for i in board_tab:
+            print(i)
         run(arg)
