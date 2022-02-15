@@ -86,8 +86,8 @@ def run(arg):
 
 
 if __name__ == "__main__":
-    x, y = ia_main.ia(map, 1)
-    print("x: ", x, " y: ", y)
-    #while True:
-    #    arg = input()
-    #    run(arg)
+    #x, y = ia_main.ia(map, 1)
+    #print("x: ", x, " y: ", y)
+    while True:
+        arg = input()
+        run(arg)
