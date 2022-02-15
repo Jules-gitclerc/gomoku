@@ -125,8 +125,8 @@ def evalMap(plateau, is_me_turn, color):
                 if len(tab) > 0 and tab[-1][2] > max_value:
                     max_value = tab[-1][2]
                 # plateau[y][x] = evalAllDirection(plateau, x, y, 1)
-    for i in tab:
-        print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
+    #for i in tab:
+        #print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
     filtered = []
     if max_value == 0:
         if plateau[int(len(plateau) / 2)][int(len(plateau[0]) / 2)] == -1:
@@ -149,8 +149,8 @@ def evalMap(plateau, is_me_turn, color):
 
 def ia(map, color):
     res = evalMap(map, True, color)
-    for i in res:
-        print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
+    #for i in res:
+        #print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
     return int(res[0][0]), int(res[0][1])
 
 
