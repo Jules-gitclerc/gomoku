@@ -1,8 +1,19 @@
 #!/usr/bin/env python3
 from typing import Union
 
+import ia_main
+
 size = 0
 
+map = [
+    [-1, 0.0, 0.0, 0.0, 0.0, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, 0.0, 1.0, 1.0, 1.0, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+]
 
 def start(input) -> str:
     if len(input) != 2 or input[1].isdigit() is False:
@@ -75,6 +86,8 @@ def run(arg) -> None:
 
 
 if __name__ == "__main__":
-    while True:
-        arg = input()
-        run(arg)
+    x, y = ia_main.ia(map, 1)
+    print("x: ", x, " y: ", y)
+    #while True:
+    #    arg = input()
+    #    run(arg)
