@@ -144,16 +144,16 @@ def evalMap(plateau, is_me_turn, color):
         for i in tab:
             if i[2] == max_value:
                 filtered.append(i)
-    #return filtered
-    find = search(tab, color, max_value)
-    return [find]
+    return filtered
 
 
 def ia(map, color):
     res = evalMap(map, True, color)
     #for i in res:
         #print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
-
+    for i in res:
+        if i[3] == color:
+            return int(i[0]), int(i[1])
     return int(res[0][0]), int(res[0][1])
 
 
