@@ -135,6 +135,8 @@ def evalMap(plateau, is_me_turn, color):
         else:
             return [tab[0]]
 
+    print(tab)
+    print(search(tab, color, max_value))
     if max_value == 0 or search(tab, color, max_value) == False:
         if plateau[int(len(plateau) / 2)][int(len(plateau[0]) / 2)] == -1:
             filtered.append([int(len(plateau[0]) / 2), int(len(plateau) / 2), 21, color])
