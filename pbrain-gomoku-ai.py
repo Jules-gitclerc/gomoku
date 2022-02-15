@@ -20,7 +20,7 @@ def start(input) -> str:
     if int(input[1]) != 20:
         return 'ERROR Start command - unsupported size or other error'
     size = input[1]
-    return "OK - everything is good"
+    return "OK"
 
 
 def turn(input):
