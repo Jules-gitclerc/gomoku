@@ -7,6 +7,13 @@ def search(tab, target, value):
     return False
 
 
+def search_two(tab, target):
+    for i in tab:
+        if i[3] == target:
+            return i
+    return False
+
+
 def vt_fct(plateau, x, y, target):
     count = 0
     for rng in range(1, 5):
@@ -130,23 +137,31 @@ def evalMap(plateau, is_me_turn, color):
     filtered = []
     if is_me_turn and max_value == 10000:
         find = search(tab, color, 10000)
-        if find:
+        if find != False:
             return [find]
         else:
             return [tab[0]]
 
     print(tab)
     print(search(tab, color, max_value))
-    if max_value == 0 or search(tab, color, max_value) == False:
+    print(max_value)
+    max_color = 0
+    filtered_color = []
+    if max_value == 0 or search_two(tab, color) == False:
         if plateau[int(len(plateau) / 2)][int(len(plateau[0]) / 2)] == -1:
-            filtered.append([int(len(plateau[0]) / 2), int(len(plateau) / 2), 21, color])
+            return [[int(len(plateau[0]) / 2), int(len(plateau) / 2), 21, color]]
         else:
-            filtered.append([0, 0, 21, color])
+            return [[0, 0, 21, color]]
     else:
         for i in tab:
-            if i[2] == max_value:
+            if i[3] == color:
+                if max_color < i[2]:
+                    max_color = i[2]
                 filtered.append(i)
-    return filtered
+        for i in filtered:
+            if i[2] == max_value:
+                filtered_color.append(i)
+    return filtered_color
 
 
 def ia(map, color):
