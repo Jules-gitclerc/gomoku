@@ -125,8 +125,8 @@ def evalMap(plateau, is_me_turn, color):
                 if len(tab) > 0 and tab[-1][2] > max_value:
                     max_value = tab[-1][2]
                 # plateau[y][x] = evalAllDirection(plateau, x, y, 1)
-    #for i in tab:
-        #print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
+    # for i in tab:
+    # print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
     filtered = []
     if is_me_turn and max_value == 10000:
         find = search(tab, color, 10000)
@@ -193,7 +193,7 @@ def place_in_map(x, y, id):
         map_init[y][x] = 0.0
     if id == 1:
         map_init[y][x] = 1.0
-    #for i in map_init:
+    # for i in map_init:
     #     print(i)
 
 
@@ -216,7 +216,7 @@ def turn(input):
     x = int(input[1])
     y = int(input[2])
     place_in_map(x, y, 0)
-    x, y = ia(map_init, 0)
+    x, y = ia(map_init, 1)
     place_in_map(x, y, 1)
     return f'{x},{y}'
 
@@ -224,13 +224,29 @@ def turn(input):
 def begin(input):
     if len(input) != 1:
         return 'ERROR', 'Begin command - No arguments expected.'
-    x = int(size / 2)
-    y = int(size / 2)
+    x, y = ia(map_init, 1)
     return f'{x}{y}'
 
 
-def board(input):
-    return "ERROR"
+def board():
+    while True:
+        inpt = input()
+        if inpt == "DONE":
+            break
+        inpt = inpt.split(',')
+        try:
+            x = int(inpt[0])
+            y = int(inpt[1])
+            p = int(inpt[2])
+        except:
+            return "ERROR 1"
+        if p != 1 and p != 2:
+            return "ERROR 2"
+        place_in_map(x, y, 0 if p == 1 else 1)
+    x, y = ia(map_init, 1)
+    for i in map_init:
+        print(i)
+    return f'{x},{y}'
 
 
 def info(input):
@@ -267,7 +283,7 @@ def run(arg):
     if input[0] == "INFO":
         print(info(input))
     if input[0] == "BOARD":
-        print(board(input))
+        print(board())
 
 
 if __name__ == "__main__":
