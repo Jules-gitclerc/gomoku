@@ -213,7 +213,7 @@ def turn(input):
     x = int(input[1])
     y = int(input[2])
     place_in_map(x, y, 0)
-    x, y = ia(map_init, 1)
+    x, y = ia(map_init, 0)
     place_in_map(x, y, 1)
     return f'{x},{y}'
 
