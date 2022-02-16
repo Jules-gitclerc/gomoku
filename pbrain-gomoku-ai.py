@@ -140,7 +140,7 @@ def evalMap(plateau, is_me_turn, color):
         if max_black == 10000:
             return [search(tab_black, color, 10000)]
         if max_white == 10000:
-            return [search(tab_white, color, 10000)]
+            return [search(tab_white, 0, 10000)]
         if max_black == 0:
             if plateau[int(len(plateau) / 2)][int(len(plateau[0]) / 2)] == -1:
                 return [[int(len(plateau[0]) / 2), int(len(plateau) / 2), 21, color]]
@@ -151,7 +151,7 @@ def evalMap(plateau, is_me_turn, color):
         if max_white == 10000:
             return [search(tab_white, color, 10000)]
         if max_black == 10000:
-            return [search(tab_black, color, 10000)]
+            return [search(tab_black, 1, 10000)]
         if max_white == 0:
             if plateau[int(len(plateau) / 2)][int(len(plateau[0]) / 2)] == -1:
                 return [[int(len(plateau[0]) / 2), int(len(plateau) / 2), 21, color]]
@@ -162,9 +162,9 @@ def evalMap(plateau, is_me_turn, color):
 
 def ia(map, color):
     res = evalMap(map, True, color)
-    for i in res:
-        if i[3] == color:
-            return int(i[0]), int(i[1])
+    #for i in res:
+    #    if i[3] == color:
+    #        return int(i[0]), int(i[1])
     return int(res[0][0]), int(res[0][1])
 
 
