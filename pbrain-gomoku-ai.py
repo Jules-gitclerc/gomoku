@@ -136,7 +136,6 @@ def evalMap(plateau, is_me_turn, color):
                     tab_white = stat_exc(eval_white, x, y, tab_white, 0)
                     if len(tab_white) > 0 and tab_white[-1][2] > max_white:
                         max_white = tab_white[-1][2]
-                # plateau[y][x] = evalAllDirection(plateau, x, y, 1)
     if is_me_turn:
         if max_black == 10000:
             return [search(tab_black, color, 10000)]
@@ -163,8 +162,6 @@ def evalMap(plateau, is_me_turn, color):
 
 def ia(map, color):
     res = evalMap(map, True, color)
-    # for i in res:
-    # print("x: ", i[0], " y: ", i[1], " Value: ", i[2], " Target: ", i[3])
     for i in res:
         if i[3] == color:
             return int(i[0]), int(i[1])
