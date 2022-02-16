@@ -242,18 +242,24 @@ def begin(input):
     return f'{x}{y}'
 
 
-def board():
+def board(arg):
+    if len(arg) != 1:
+        return 'ERROR', 'Board command - No arguments expected.'
     while True:
         inpt = input()
         if inpt == "DONE":
             break
         inpt = inpt.split(',')
+        if len(inpt) != 3:
+            return 'ERROR'
         try:
             x = int(inpt[0])
             y = int(inpt[1])
             p = int(inpt[2])
         except:
             return "ERROR 1"
+        if x not in range(size) or y not in range(size):
+            return 'ERROR 1'
         if p != 1 and p != 2:
             return "ERROR 2"
         place_in_map(x, y, 0 if p == 1 else 1)
@@ -297,7 +303,7 @@ def run(arg):
     if input[0] == "INFO":
         print(info(input))
     if input[0] == "BOARD":
-        print(board())
+        print(board(input))
 
 
 if __name__ == "__main__":
