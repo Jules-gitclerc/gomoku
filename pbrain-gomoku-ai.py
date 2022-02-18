@@ -236,7 +236,7 @@ def begin(input):
     if len(input) != 1:
         return 'ERROR', 'Begin command - No arguments expected.'
     x, y = ia(map_init, 1)
-    return f'{x}{y}'
+    return f'{x},{y}'
 
 
 def board(arg):
